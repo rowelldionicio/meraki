@@ -2,7 +2,7 @@
 
 """
 Written by Rowell Dionicio (@rowelldionicio)
-Created on: August 29, 2020
+Created on: August 20, 2020
 This script will print out enabled SSIDs on a specific Meraki network.
 The API key is stored in a .env file and is called by the dotenv library.
 """
