@@ -10,6 +10,7 @@ The API key is stored in a .env file and is called by the dotenv library.
 import requests
 import json
 import os
+import time
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -26,13 +27,20 @@ headers = {
   'X-Cisco-Meraki-API-Key': apikey
 }
 
-
 response = requests.request("GET", url, headers=headers, data = payload)
 
 ssids = json.loads(response.text)
-#print(json.dumps(ssids, sort_keys=True, indent=4, separators=(',', ':')))
 
-# Looping over list of SSIDs and only printing out the enabled SSIDs
-for ssid in ssids:
-    if ssid['enabled'] != False:
-        print("SSID: {}".format(ssid['name']))
+# Function looping over list of SSIDs and only printing out the enabled SSIDs
+def getSSIDs():
+    for ssid in ssids:
+        if ssid['enabled'] != False:
+            print("SSID: {}".format(ssid['name']))
+
+if __name__ == '__main__':
+    start_time = time.time()
+    print('** Getting enabled SSIDs...\n')
+    getSSIDs()
+
+    run_time = time.time() - start_time
+    print(f"\n** Time to run: {round(run_time, 2)} sec")
